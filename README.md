@@ -1,4 +1,4 @@
-# StatsTFLValR <img src="Images/Logo1.png" align="left" height="150" />
+# StatsTFLValR <img src="man/figures/logo.png" align="left" height="140" />
 
 <!-- Badges -->
 <!-- Replace username with your GitHub ID -->
@@ -9,7 +9,7 @@
 
 ---
 
-## Overview
+# Overview
 
 **StatsTFLValR** provides reusable, audit-ready utilities for validating clinical trial data across  
 **SDTM → ADaM → TFL** workflows.  
@@ -27,7 +27,7 @@ The goal is to standardize and streamline clinical programming validation in R.
 
 ---
 
-## Key Features
+# Key Features
 
 ### 🔹 **SDTM Utilities**
 - `stval_read_xpt()` – load XPT consistently  
@@ -50,7 +50,7 @@ The goal is to standardize and streamline clinical programming validation in R.
 
 ---
 
-## Installation
+# Installation
 
 ### Install development version from GitHub:
 

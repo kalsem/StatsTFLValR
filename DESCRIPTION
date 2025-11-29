@@ -30,7 +30,8 @@ Imports:
     rlang,
     haven,
     glue,
-    magrittr
+    magrittr,
+    readxl
 Suggests:
     knitr,
     rmarkdown,

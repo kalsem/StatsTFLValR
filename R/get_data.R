@@ -22,28 +22,61 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Initialize directory structure
-#'   paths <- projectSetup::init_project()
 #'
-#'   # Load a single dataset from ADaM
-#'   adae <- get_data(paths$adam_ds, "adae")
+#'   # ------------------------------------------------------------------
+#'   # 1) Initialize directory structure (Windows example)
+#'   # ------------------------------------------------------------------
 #'
-#'   # Load multiple datasets by base name
-#'   get_data(paths$adam_ds, c("adsl", "adae"))
+#'   # Use proper slashes in Windows paths:
+#'   adam_ds <- "C:/R-Packages/adam/"
+#'   # OR: adam_ds <- "C:\\R-Packages\\adam\\"
 #'
-#'   # Load all supported datasets from a directory
-#'   get_data(paths$adam_ds)
 #'
-#'   > get_data(paths$adam_ds)
-#'   Error in get_data(paths$adam_ds) :
-#'     Multiple files found with the same base name (different extensions):
-#'       - adlb.sas7bdat
-#'       - ADLB.xpt
-#'       - admh.sas7bdat
-#'       - ADMH.xpt
-#'       Please resolve file name conflicts or use only one extension per base name.
-#'   >
+#'   # ------------------------------------------------------------------
+#'   # 2) Load a single dataset from ADaM
+#'   # ------------------------------------------------------------------
+#'
+#'   adae <- get_data(adam_ds, "adae")
+#'
+#'
+#'   # ------------------------------------------------------------------
+#'   # 3) Load multiple datasets by base name
+#'   # ------------------------------------------------------------------
+#'
+#'   get_data(adam_ds, c("adsl", "adae"))
+#'
+#'
+#'   # ------------------------------------------------------------------
+#'   # 4) Load all supported datasets from a directory
+#'   # ------------------------------------------------------------------
+#'
+#'   get_data(adam_ds)
+#'
+#'
+#'   # ------------------------------------------------------------------
+#'   # 5) Example: duplicate base names trigger an error
+#'   # ------------------------------------------------------------------
+#'
+#'   # If your folder contains files like:
+#'   #   adlb.sas7bdat
+#'   #   ADLB.xpt
+#'   #   admh.sas7bdat
+#'   #   ADMH.xpt
+#'   #
+#'   # Then the following will throw:
+#'   #
+#'   #   Error in get_data(adam_ds):
+#'   #     Multiple files found with the same base name (different extensions):
+#'   #       - adlb.sas7bdat
+#'   #       - ADLB.xpt
+#'   #       - admh.sas7bdat
+#'   #       - ADMH.xpt
+#'   #     Please resolve file name conflicts or use only one extension per base name.
+#'   #
+#'   # get_data(adam_ds)
+#'
 #' }
+
 #' @export
 get_data <- function(dir, file_names = NULL) {
   exts <- c("sas7bdat", "xpt", "csv", "xls", "xlsx")
