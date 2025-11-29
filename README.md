@@ -1,3 +1,4 @@
-# <img src="Images/Logo1.png" align="right" height="150" />
+# <img src="Images/Logo1.png" align="left" height="200" />
 # StatsTFLValR
-Reusable functions to support audit-ready validation of statistical programming outputs across SDTM, ADaM, and TFL workflows.      Provides standardized utilities for importing SDTM/ADaM data,      deriving key analysis variables, generating and validating TFL counts, and producing compare-style reports similar to SAS PROC COMPARE.
+Reusable functions to support audit-ready validation of statistical programming outputs across SDTM, ADaM, and TFL workflows.      
+Provides standardized utilities for importing SDTM/ADaM data,deriving key analysis variables, generating and validating TFL counts, and producing compare-style reports similar to SAS PROC COMPARE.
