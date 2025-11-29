@@ -1,4 +1,4 @@
-# StatsTFLValR <img src="man/figures/logo.png" align="left" height="140" />
+# StatsTFLValR <img src="man/figures/Logo1.png" align="left" height="140" />
 
 <!-- Badges -->
 <!-- Replace username with your GitHub ID -->
