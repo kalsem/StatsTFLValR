@@ -31,7 +31,8 @@ Imports:
     haven,
     glue,
     magrittr,
-    readxl
+    readxl,
+    tidyselect
 Suggests:
     knitr,
     rmarkdown,
