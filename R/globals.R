@@ -4,3 +4,4 @@ utils::globalVariables(c(
     "mean_", "sd_", "min_", "max_", "Q1", "Q3",
     "median_", "n1", "mn", "sd", "med1", "Q1_Q3", "mn_mx"
   ))
+utils::globalVariables(c("sort_n", "sec_ord", "sort_ord", "uncoded"))

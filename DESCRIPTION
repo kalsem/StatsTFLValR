@@ -24,13 +24,8 @@ Imports:
     dplyr,
     tidyr,
     tibble,
-    readr,
-    purrr,
-    stringr,
     rlang,
     haven,
-    glue,
-    magrittr,
     readxl,
     tidyselect
 Suggests:
