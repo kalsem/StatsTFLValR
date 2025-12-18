@@ -27,7 +27,10 @@ Imports:
     rlang,
     haven,
     readxl,
-    tidyselect
+    tidyselect,
+    purrr,
+    arsenal,
+    data.table
 Suggests:
     knitr,
     rmarkdown,

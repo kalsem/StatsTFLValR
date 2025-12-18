@@ -5,4 +5,14 @@ utils::globalVariables(c(
     "median_", "n1", "mn", "sd", "med1", "Q1_Q3", "mn_mx"
   ))
 utils::globalVariables(c("sort_n", "sec_ord", "sort_ord", "uncoded","HAS_NUM",
-                         "GRADE_LAB", "_SUBVARLBL_"))
+                         "GRADE_LAB", "_SUBVARLBL_", "psec_ord"))
+utils::globalVariables(c(
+  # data.table special symbols
+  ".SD", ".N",
+
+  # data.table ..-prefixed variables used for NSE
+  "..by_vars", "..common_cols", "..vars_to_use",
+
+  # columns you create on-the-fly
+  "_TYPE_", "_OBS_"
+))
