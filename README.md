@@ -99,7 +99,7 @@ The following functions are currently exported in **StatsTFLValR**:
 ---
 ## Installation
 
-###You can install the released version of StatsTFLValR from **CRAN**:
+###You can install the released version of StatsTFLValR from CRAN:
 
 ```r
 install.packages("StatsTFLValR")  
@@ -170,4 +170,4 @@ This package is provided as a supporting utility and does not replace formal val
 Use of this package does not imply compliance with regulatory requirements.
 Users are responsible for ensuring appropriate validation, documentation, and governance in accordance with their internal procedures.
 
----
+
