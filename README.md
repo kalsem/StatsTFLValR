@@ -99,7 +99,7 @@ The following functions are currently exported in **StatsTFLValR**:
 ---
 ## Installation
 
-###You can install the released version of StatsTFLValR from CRAN:
+### You can install the released version of StatsTFLValR from CRAN:
 
 ```r
 install.packages("StatsTFLValR")  
@@ -117,7 +117,7 @@ install.packages("StatsTFLValR", dependencies = TRUE)
 remotes::install_github("kalsem/StatsTFLValR")
 ```
 
-###Verify installation
+### Verify installation
 
 ```r
 library(StatsTFLValR)
@@ -126,9 +126,9 @@ packageVersion("StatsTFLValR")
 
 ---
 
-##Usage
+## Usage
 
-###Load the package:
+### Load the package:
 
 ```r
 library(StatsTFLValR)
@@ -145,7 +145,7 @@ A PDF reference manual is available in the GitHub repository.
 📄 [Download StatsTFLValR PDF Manual](https://github.com/kalsem/StatsTFLValR/blob/main/docs/StatsTFLValR_1.0.0.pdf)
 ---
 
-##Package Status
+## Package Status
 
 **Lifecycle:** Experimental
 
@@ -157,7 +157,7 @@ Bug reports and enhancement requests can be submitted via GitHub issues.
 
 ---
 
-##License
+## License
 
 This package is licensed under the MIT License.
 See the LICENSE file for details.
