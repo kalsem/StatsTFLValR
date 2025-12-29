@@ -2,7 +2,6 @@
 
 <!-- Badges -->
 <!-- Replace username with your GitHub ID -->
-[![R-CMD-check](https://github.com/kalsem/StatsTFLValR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kalsem/StatsTFLValR/actions)
 ![Lifecycle: Experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/kalsem/StatsTFLValR)](https://github.com/kalsem/StatsTFLValR/issues)

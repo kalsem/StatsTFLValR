@@ -1,18 +1,17 @@
 Package: StatsTFLValR
 Type: Package
-Title: Audit-Ready Clinical Validation Utilities for SDTM, ADaM, and TFL Workflows
+Title: Utilities for Validation of Clinical Trial Datasets and Outputs
 Version: 1.0.0
 Authors@R: 
     person("Mangesh", "Kalsekar", 
            email = "kalsekar.mangesh@gmail.com", 
            role = c("aut", "cre"))
-Description: Provides utilities for clinical trial data validation and statistical
-             programming across CDISC SDTM, ADaM, and TFL workflows. Functions support
-             dataset loading, SUPP merging, derivations, population and Big-N
-             computations, frequency and summary table construction, and
-             PROC COMPARE-style dataset comparison reports. The package emphasizes
-             reproducibility, traceability, and audit-ready outputs suitable for
-             regulated clinical research environments.
+Description: Provides utility functions for validation and quality control of
+    clinical trial datasets and outputs. The package supports dataset loading,
+    metadata inspection, frequency and summary calculations, table-ready
+    aggregations, and compare-style dataset review similar to SAS PROC COMPARE.
+    Functions are designed to support reproducible execution, transparent review,
+    and independent verification of statistical programming results.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
