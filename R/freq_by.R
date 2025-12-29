@@ -77,7 +77,7 @@
 #'     AGEGR1 = dplyr::case_when(
 #'       AGE < 65            ~ "<65 years",
 #'       AGE >= 65 & AGE < 75 ~ "65–<75 years",
-#'       AGE >= 75           ~ "≥75 years"
+#'       AGE >= 75           ~ ">=75 years"
 #'     )
 #'   )
 #'

@@ -11,7 +11,7 @@
 #' population (used to calculate percentages).
 #'
 #' Useful for producing compact summary rows (e.g., "SAF Population",
-#' "Subjects ≥65") in clinical tables.
+#' "Subjects >= 65") in clinical tables.
 #'
 #' @param data A data.frame containing subject-level data.
 #' @param id_var Unquoted subject ID variable (e.g., `USUBJID`).
@@ -45,7 +45,7 @@
 #' freq_by_line(
 #'   adsl, USUBJID, TRT01P,
 #'   AGE >= 65,
-#'   label = "Age ≥65 in SAF",
+#'   label = "Age >=65 in SAF",
 #'   denom_data = saf
 #' )
 #'

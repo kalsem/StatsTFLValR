@@ -1,19 +1,18 @@
 Package: StatsTFLValR
 Type: Package
 Title: Audit-Ready Clinical Validation Utilities for SDTM, ADaM, and TFL Workflows
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
     person("Mangesh", "Kalsekar", 
-           email = "kalsem@gmail.com", 
+           email = "kalsekar.mangesh@gmail.com", 
            role = c("aut", "cre"))
-Description: StatsTFLValR provides reusable, audit-ready utilities for 
-    statistical programming workflows across SDTM, ADaM, and TFL layers.
-    The package includes standardized functions for dataset loading, SUPP 
-    merging, derivations, analysis flag checks, Big N and percentage 
-    calculations, population counts, TFL table-ready summaries, and 
-    PROC COMPARE-style dataset comparison reports. Designed to support
-    validation and quality control in clinical trial programming within
-    a compliant environment.
+Description: Provides utilities for clinical trial data validation and statistical
+             programming across CDISC SDTM, ADaM, and TFL workflows. Functions support
+             dataset loading, SUPP merging, derivations, population and Big-N
+             computations, frequency and summary table construction, and
+             PROC COMPARE-style dataset comparison reports. The package emphasizes
+             reproducibility, traceability, and audit-ready outputs suitable for
+             regulated clinical research environments.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -36,7 +35,8 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     gt,
-    gtsummary
+    gtsummary,
+    withr
 Config/testthat/edition: 3
 LazyData: true
 URL: https://github.com/kalsem/StatsTFLValR

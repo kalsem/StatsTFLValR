@@ -38,7 +38,7 @@ dataset (\code{denom_data}) can be specified to override the default denominator
 population (used to calculate percentages).
 
 Useful for producing compact summary rows (e.g., "SAF Population",
-"Subjects ≥65") in clinical tables.
+"Subjects >= 65") in clinical tables.
 }
 \examples{
 set.seed(123)
@@ -57,7 +57,7 @@ saf <- adsl[adsl$SAFFL == "Y", ]
 freq_by_line(
   adsl, USUBJID, TRT01P,
   AGE >= 65,
-  label = "Age ≥65 in SAF",
+  label = "Age >=65 in SAF",
   denom_data = saf
 )
 
