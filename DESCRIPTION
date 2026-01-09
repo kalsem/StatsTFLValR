@@ -9,7 +9,7 @@ Authors@R:
 Description: Provides utility functions for validation and quality control of
     clinical trial datasets and outputs. The package supports dataset loading,
     metadata inspection, frequency and summary calculations, table-ready
-    aggregations, and compare-style dataset review similar to SAS PROC COMPARE.
+    aggregations, and compare-style dataset review similar to SAS COMPARE.
     Functions are designed to support reproducible execution, transparent review,
     and independent verification of statistical programming results.
 License: MIT + file LICENSE
