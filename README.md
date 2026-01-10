@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/kalsem/StatsTFLValR)](https://github.com/kalsem/StatsTFLValR/issues)
 
----
+***
 
 ## Overview
 
@@ -22,7 +22,7 @@ The package emphasizes:
 
 **StatsTFLValR** is intended for use by Statistical Programmers, Statisticians, and validation reviewers.
 
----
+***
 
 # Key Features
 
@@ -32,7 +32,7 @@ The package emphasizes:
 - **`get_data()`** – Load datasets from multiple formats (XPT, SAS, CSV, RDS) with validation and duplicate-file checks  
 - **`get_column_info()`** – Extract variable-level metadata (names, types, labels) for dataset inspection and documentation  
 
----
+***
 
 ### 🔹 Frequency, Counts, and Summary Utilities
 - **`freq_by()`** – Grouped subject counts and percentage summaries  
@@ -40,7 +40,7 @@ The package emphasizes:
 - **`mean_by()`** – Grouped descriptive statistics (mean, median, quantiles)  
 - **`sas_round()`** – SAS-style rounding utility for consistent percentages  
 
----
+***
 
 ### 🔹 Table-Building Functions
 - **`SOCbyPT()`** – SOC–PT–level adverse event summaries  
@@ -49,7 +49,7 @@ The package emphasizes:
 
 Built-in ordering, indentation, and formatting logic is designed to support **TFL validation and QC review**.
 
----
+***
 
 ### 🔹 Dataset and Output Comparison
 - **`generate_compare_report()`** – PROC COMPARE–style dataset comparison utility  
@@ -57,13 +57,13 @@ Built-in ordering, indentation, and formatting logic is designed to support **TF
   - Compares variable attributes and values  
   - Produces structured, review-ready outputs  
 
----
+***
 
 ### 🔹 Supporting Infrastructure
 - Centralized global variable declarations (`globals.R`) to support CRAN checks  
 - Internal helper utilities (`ps_helpers.R`) reused across functions to ensure consistent behavior  
 
----
+***
 
 ## Function Index
 
@@ -80,7 +80,7 @@ The following functions are currently exported in **StatsTFLValR**:
 - `ATCbyDrug()` – ATC-based medication summaries  
 - `generate_compare_report()` – Dataset comparison (PROC COMPARE–style)  
 
----
+***
 
 ## Capability → Function Mapping
 
@@ -95,7 +95,7 @@ The following functions are currently exported in **StatsTFLValR**:
 | Dataset comparison               | `generate_compare_report()`                 | Developer vs validator comparison |
 | Rounding consistency             | `sas_round()`                               | SAS-aligned rounding |
 
----
+***
 ## Installation
 
 ### You can install the released version of StatsTFLValR from CRAN:
@@ -123,7 +123,7 @@ library(StatsTFLValR)
 packageVersion("StatsTFLValR")
 ```
 
----
+***
 
 ## Usage
 
@@ -142,7 +142,7 @@ Access function-level documentation:
 
 A PDF reference manual is available in the GitHub repository.
 📄 [Download StatsTFLValR PDF Manual](https://github.com/kalsem/StatsTFLValR/blob/main/docs/StatsTFLValR_1.0.0.pdf)
----
+***
 
 ## Package Status
 
@@ -154,14 +154,14 @@ Interfaces and behavior may change in future releases
 
 Bug reports and enhancement requests can be submitted via GitHub issues.
 
----
+***
 
 ## License
 
 This package is licensed under the MIT License.
 See the LICENSE file for details.
 
----
+***
 
 ## Disclaimer
 
