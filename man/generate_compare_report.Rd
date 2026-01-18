@@ -10,7 +10,7 @@ generate_compare_report(
   val_dir,
   by_vars = c("STUDYID", "USUBJID"),
   vars_to_check = NULL,
-  report_dir = getwd(),
+  report_dir = NULL,
   prefix_val = "v_",
   max_print = 50,
   write_csv = FALSE,
@@ -107,105 +107,62 @@ When \code{write_csv = TRUE}, the output includes:
 }
 }
 \examples{
-\dontrun{
-# ------------------------------------------------------------
-# Example 1: Basic comparison (auto-detect CSV files)
-# DEV: adae.csv
-# VAL: v-adae.csv
-generate_compare_report(
-  domain    = "adae",
-  dev_dir   = "C:/R-Packages/adam/dev",
-  val_dir   = "C:/R-Packages/adam/val",
-  by_vars   = c("STUDYID","USUBJID","AESEQ"),
-  write_csv = TRUE
-)
+\donttest{
+# Create a self-contained example using temp directories
+td <- tempdir()
+dev_dir <- file.path(td, "dev")
+val_dir <- file.path(td, "val")
+rpt_dir <- file.path(td, "rpt")
+dir.create(dev_dir, showWarnings = FALSE)
+dir.create(val_dir, showWarnings = FALSE)
+dir.create(rpt_dir, showWarnings = FALSE)
 
-# ------------------------------------------------------------
-# Example 2: Case-insensitive domain name ("ADAE" matches adae.*)
-generate_compare_report(
-  domain  = "ADAE",
-  dev_dir = "C:/R-Packages/adam/dev",
-  val_dir = "C:/R-Packages/adam/val",
-  by_vars = c("STUDYID","USUBJID","AESEQ")
+# Minimal DEV/VAL CSVs (ADAE-like)
+dev <- data.frame(
+  STUDYID = "STDY1",
+  USUBJID = c("01", "02"),
+  AESEQ   = c(1, 1),
+  AETERM  = c("HEADACHE", "NAUSEA"),
+  stringsAsFactors = FALSE
 )
+val <- dev
+val$AETERM[2] <- "VOMITING"
 
-# ------------------------------------------------------------
-# Example 3: Mixed formats (DEV .sas7bdat, VAL .xpt)
-# DEV: adsl.sas7bdat
-# VAL: v_adsl.xpt (or v-adsl.xpt)
-generate_compare_report(
-  domain  = "adsl",
-  dev_dir = "D:/study/dev/adam",
-  val_dir = "D:/study/val/sasout",
-  by_vars = c("STUDYID","USUBJID")
-)
+utils::write.csv(dev, file.path(dev_dir, "adae.csv"), row.names = FALSE)
+utils::write.csv(val, file.path(val_dir, "v-adae.csv"), row.names = FALSE)
 
-# ------------------------------------------------------------
-# Example 4: Hyphenated domain (e.g., TFL artifacts)
-# DEV: rt-ae-sum.csv
-# VAL: v-rt-ae-sum.csv
-generate_compare_report(
-  domain    = "rt-ae-sum",
-  dev_dir   = "C:/R-Packages/adam/dev",
-  val_dir   = "C:/R-Packages/adam/val",
-  by_vars   = c("STUDYID","USUBJID","AESEQ"),
-  write_csv = TRUE
-)
-
-# ------------------------------------------------------------
-# Example 5: Filtered comparison (subset both datasets)
-generate_compare_report(
-  domain      = "adae",
-  dev_dir     = "C:/adam/dev",
-  val_dir     = "C:/adam/val",
-  by_vars     = c("STUDYID","USUBJID","AESEQ"),
-  filter_expr = "SAFFL == 'Y' & TRTEMFL == 'Y'",
-  write_csv   = TRUE
-)
-
-# ------------------------------------------------------------
-# Example 6: Restrict comparison to specific variables only
+# Example 1: basic comparison + PROC COMPARE-style CSV
 generate_compare_report(
   domain        = "adae",
-  dev_dir       = "C:/adam/dev",
-  val_dir       = "C:/adam/val",
+  dev_dir       = dev_dir,
+  val_dir       = val_dir,
   by_vars       = c("STUDYID","USUBJID","AESEQ"),
-  vars_to_check = c("AETOXGR", "AEREL", "ASTDT", "AENDT"),
-  write_csv     = TRUE
-)
-
-# ------------------------------------------------------------
-# Example 7: CSV only (skip comparedf / LST report)
-generate_compare_report(
-  domain        = "adlb",
-  dev_dir       = "C:/adam/dev",
-  val_dir       = "C:/adam/val",
-  by_vars       = c("STUDYID","USUBJID","PARAMCD","AVISITN"),
+  report_dir    = rpt_dir,
   write_csv     = TRUE,
   run_comparedf = FALSE
 )
 
-# ------------------------------------------------------------
-# Example 8: Compare only key alignment (minimal variable selection)
-# Useful when you only want to detect missing/extra keys quickly.
+# Example 2: case-insensitive domain ("ADAE" matches adae.csv)
 generate_compare_report(
-  domain        = "adsl",
-  dev_dir       = "C:/adam/dev",
-  val_dir       = "C:/adam/val",
-  by_vars       = c("STUDYID","USUBJID"),
-  vars_to_check = c("USUBJID"),   # effectively only key coverage + minimal compare
-  run_comparedf = FALSE,
-  write_csv     = TRUE
+  domain        = "ADAE",
+  dev_dir       = dev_dir,
+  val_dir       = val_dir,
+  by_vars       = c("STUDYID","USUBJID","AESEQ"),
+  report_dir    = rpt_dir,
+  write_csv     = FALSE,
+  run_comparedf = FALSE
 )
 
-# ------------------------------------------------------------
-# Example 9: Ambiguous file error (intentional safety stop)
-# DEV folder contains both adae.csv and adae.xpt -> stop
+# Example 3: filter expression (same inputs, filtered)
 generate_compare_report(
-  domain  = "adae",
-  dev_dir = "C:/adam/dev",
-  val_dir = "C:/adam/val",
-  by_vars = c("STUDYID","USUBJID","AESEQ")
+  domain        = "adae",
+  dev_dir       = dev_dir,
+  val_dir       = val_dir,
+  by_vars       = c("STUDYID","USUBJID","AESEQ"),
+  report_dir    = rpt_dir,
+  filter_expr   = "USUBJID == '02'",
+  write_csv     = TRUE,
+  run_comparedf = FALSE
 )
 }
 }

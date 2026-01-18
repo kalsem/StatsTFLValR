@@ -1,17 +1,19 @@
 Package: StatsTFLValR
 Type: Package
-Title: Utilities for Validation of Clinical Trial Datasets and Outputs
+Title: Utilities for Validation of Clinical Trial 'SDTM', 'ADaM' and 'TFL' Outputs
 Version: 1.0.0
 Authors@R: 
     person("Mangesh", "Kalsekar", 
            email = "kalsekar.mangesh@gmail.com", 
            role = c("aut", "cre"))
 Description: Provides utility functions for validation and quality control of
-    clinical trial datasets and outputs. The package supports dataset loading,
-    metadata inspection, frequency and summary calculations, table-ready
-    aggregations, and compare-style dataset review similar to SAS COMPARE.
-    Functions are designed to support reproducible execution, transparent review,
-    and independent verification of statistical programming results.
+    clinical trial datasets and outputs across 'SDTM', 'ADaM' and 'TFL' workflows.
+    The package supports dataset loading, metadata inspection, frequency and
+    summary calculations, table-ready aggregations, and compare-style dataset
+    review similar to 'SAS' 'PROC COMPARE'. Functions are designed to support
+    reproducible execution, transparent review, and independent verification of
+    statistical programming results. Dataset comparisons may leverage 'arsenal'
+    <https://cran.r-project.org/package=arsenal>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

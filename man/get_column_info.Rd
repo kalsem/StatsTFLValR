@@ -53,9 +53,15 @@ including column name, label, format, class/type, missingness, uniqueness,
 and (optionally) SAS-style display for Date variables (e.g., DATE9 -> 09JUL2012).
 }
 \examples{
-\dontrun{
-  df <- haven::read_sas("adae.sas7bdat")
-  out <- get_column_info(df)
-  print(out)
+\donttest{
+df <- data.frame(
+  USUBJID = c("01", "02", "03"),
+  AGE     = c(45, 50, NA),
+  TRTAN   = c(1L, 2L, 1L),
+  ASTDT   = as.Date(c("2024-01-01", "2024-01-02", "2024-01-03")),
+  stringsAsFactors = FALSE
+)
+
+get_column_info(df)
 }
 }

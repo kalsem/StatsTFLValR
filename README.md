@@ -1,3 +1,8 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 # StatsTFLValR <img src="man/figures/Logo1.png" align="left" height="140" />
 
 <!-- Badges -->

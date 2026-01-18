@@ -86,6 +86,136 @@
 #'   \item \code{sort_ord}, \code{sec_ord}
 #' }
 #'
+#' @examples
+#' ## Example 1: Basic SOC -> PT by TRT with grade split (default settings)
+#' ## - Uses numeric grade column (AETOXGRN) and auto-detects grade_char if present
+#' ## - sort is driven by reference arm trtan_coln and sort_grade (default 5)
+#' ## - PT labels are RTF-indented when rtf_safe = TRUE (default)
+#' \donttest{
+#' library(dplyr)
+#'
+#' # AE-like input: can have multiple AE records per subject
+#' adae <- tibble::tribble(
+#'   ~USUBJID, ~TRTAN, ~AEBODSYS,           ~AEDECOD,          ~AETOXGRN,
+#'   "01",       11,   "GASTROINTESTINAL",  "NAUSEA",          2,
+#'   "01",       11,   "GASTROINTESTINAL",  "VOMITING",        3,
+#'   "02",       11,   "GASTROINTESTINAL",  "NAUSEA",          5,
+#'   "03",       12,   "NERVOUS SYSTEM",    "HEADACHE",        1,
+#'   "03",       12,   "NERVOUS SYSTEM",    "DIZZINESS",       2,
+#'   "04",       12,   "GASTROINTESTINAL",  "NAUSEA",          4
+#' )
+#'
+#' # Denominators: one row per subject (ADSL-like)
+#' adsl <- tibble::tribble(
+#'   ~USUBJID, ~TRTAN,
+#'   "01",       11,
+#'   "02",       11,
+#'   "03",       12,
+#'   "04",       12
+#' )
+#'
+#' out1 <- SOCbyPT_Grade(
+#'   indata     = adae,
+#'   dmdata     = adsl,
+#'   group_vars = c("TRTAN", "AEBODSYS", "AEDECOD"),
+#'   trtan_coln = "12"   # reference arm for ordering
+#' )
+#'
+#' out1
+#'
+#' # Output columns are wide by TRT and Grade bucket:
+#' # TRT11_GRADE1..TRT11_GRADE5, TRT11_NOT_REPORTED, same for TRT12_*
+#' # stat label is returned in `_SUBVARLBL_`
+#' }
+#'
+#' ## Example 2: Add SOC subtotal rows + blank SOC header grade columns
+#' ## - soc_totals = TRUE adds a subtotal row per SOC using the same max-grade logic as PT
+#' ## - header_blank controls whether SOC header rows show blanks (when soc_totals = FALSE)
+#' \donttest{
+#' out2 <- SOCbyPT_Grade(
+#'   indata       = adae,
+#'   dmdata       = adsl,
+#'   group_vars   = c("TRTAN", "AEBODSYS", "AEDECOD"),
+#'   trtan_coln   = "12",
+#'   soc_totals   = TRUE,     # add SOC totals
+#'   header_blank = TRUE      # (has effect mainly when soc_totals = FALSE)
+#' )
+#'
+#' out2
+#' }
+#'
+#' ## Example 3: Include character grade with NR mapping + sort by NOT REPORTED
+#' ## - grade_char values in nr_char_values are treated as Not Reported
+#' ## - sort_grade can be "NOT REPORTED" to order SOC/PT blocks by NR counts in reference arm
+#' \donttest{
+#' adae2 <- tibble::tribble(
+#'   ~USUBJID, ~TRTAN, ~AEBODSYS,          ~AEDECOD,     ~AETOXGRN, ~AETOXGR,
+#'   "01",       11,   "GASTROINTESTINAL", "NAUSEA",     2,         "",
+#'   "02",       11,   "GASTROINTESTINAL", "NAUSEA",     NA,        "NR",
+#'   "03",       12,   "NERVOUS SYSTEM",   "HEADACHE",   3,         NA,
+#'   "04",       12,   "UNCODED",          "UNCODED",    NA,        "NOT REPORTED"
+#' )
+#'
+#' out3 <- SOCbyPT_Grade(
+#'   indata       = adae2,
+#'   dmdata       = adsl,
+#'   group_vars   = c("TRTAN", "AEBODSYS", "AEDECOD"),
+#'   trtan_coln   = "12",
+#'   grade_num    = "AETOXGRN",
+#'   grade_char   = "AETOXGR",
+#'   sort_grade   = "NOT REPORTED",     # order blocks by NR counts in reference arm
+#'   rtf_safe     = FALSE,              # makes PT labels plain (no RTF indent string)
+#'   uncoded_position = "last"          # push UNCODED SOC block to the end
+#' )
+#'
+#' out3
+#' }
+#'
+#' ## Example 4: BY strata (e.g., SEX) + Big-N options
+#' ## - by_var creates separate strata in the output (no extra BY header rows)
+#' ## - bigN_by="NO": denominators are by TRT only (default)
+#' ## - bigN_by="YES": denominators are by BY x TRT (requires by_var present in pop_data/dmdata)
+#' \donttest{
+#' adae_sex <- tibble::tribble(
+#'   ~USUBJID, ~TRTAN, ~SEX, ~AEBODSYS,          ~AEDECOD,    ~AETOXGRN,
+#'   "01",       11,   "M",  "GASTROINTESTINAL", "NAUSEA",    2,
+#'   "02",       11,   "F",  "GASTROINTESTINAL", "NAUSEA",    5,
+#'   "03",       12,   "M",  "NERVOUS SYSTEM",   "HEADACHE",  3,
+#'   "04",       12,   "F",  "NERVOUS SYSTEM",   "DIZZINESS", 1
+#' )
+#'
+#' # If you want denominators stratified by SEX as well, dmdata/pop_data must include SEX
+#' adsl_sex <- tibble::tribble(
+#'   ~USUBJID, ~TRTAN, ~SEX,
+#'   "01",       11,   "M",
+#'   "02",       11,   "F",
+#'   "03",       12,   "M",
+#'   "04",       12,   "F"
+#' )
+#'
+#' out4_trtN <- SOCbyPT_Grade(
+#'   indata     = adae_sex,
+#'   dmdata     = adsl_sex,
+#'   group_vars = c("TRTAN", "AEBODSYS", "AEDECOD"),
+#'   trtan_coln = "12",
+#'   by_var     = "SEX",
+#'   bigN_by    = "NO",        # denominators by TRT only
+#'   print_bigN = TRUE
+#' )
+#'
+#' out4_byN <- SOCbyPT_Grade(
+#'   indata     = adae_sex,
+#'   dmdata     = adsl_sex,
+#'   group_vars = c("TRTAN", "AEBODSYS", "AEDECOD"),
+#'   trtan_coln = "12",
+#'   by_var     = "SEX",
+#'   bigN_by    = "YES",       # denominators by SEX x TRT
+#'   print_bigN = TRUE
+#' )
+#'
+#' out4_trtN
+#' out4_byN
+#' }
 #' @export
 SOCbyPT_Grade <- function(indata,
                           dmdata,
