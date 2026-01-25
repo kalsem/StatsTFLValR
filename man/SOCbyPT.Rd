@@ -85,13 +85,10 @@ from the AE dataset, order BY groups by a separate key, add TOTAL rows, control
 UNCODED placement, and optionally calculate percentages using BY-specific denominators.
 }
 \examples{
-## Example 1: Basic SOC -> PT summary by TRT (wide), default ordering + RTF indent for PT
-## - Ordering is driven by reference arm trtan_coln (descending counts, then alpha)
-## - PT labels are prefixed with indent_str when rtf_safe = TRUE (default)
-\donttest{
+
 library(dplyr)
 
-# AE-like input (multiple rows per subject allowed)
+
 adae <- tibble::tribble(
   ~USUBJID, ~TRTAN, ~AEBODSYS,          ~AEDECOD,
   "01",       11,   "GASTROINTESTINAL", "NAUSEA",
@@ -102,7 +99,6 @@ adae <- tibble::tribble(
   "05",       12,   "UNCODED",          "UNCODED"
 )
 
-# Denominators (ADSL-like): one row per subject
 adsl <- tibble::tribble(
   ~USUBJID, ~TRTAN,
   "01",       11,
@@ -121,16 +117,9 @@ out1 <- SOCbyPT(
 
 out1
 
-# Output columns:
-# - STAT (SOC headers + indented PT lines)
-# - TRT11, TRT12, ... (formatted "n (pct)")
-# - sort_ord, sec_ord
-}
 
-## Example 2: Plain-text PT labels (no RTF indent) + header blanking
-## - rtf_safe = FALSE leaves PT labels un-prefixed
-## - header_blank = TRUE blanks treatment cells on SOC header rows (TOTAL row remains populated)
-\donttest{
+
+
 out2 <- SOCbyPT(
   indata       = adae,
   dmdata       = adsl,
@@ -141,13 +130,9 @@ out2 <- SOCbyPT(
 )
 
 out2
-}
 
-## Example 3: BY stratification (e.g., SEX) with BY ordering + UNCODED pushed last
-## - by_var splits output into strata; ordering is independent per stratum
-## - by_sort_var controls the ordering of strata (numeric or character)
-## - uncoded_position = "last" pushes STAT == "UNCODED" blocks to the bottom within each BY stratum
-\donttest{
+
+
 adae_sex <- tibble::tribble(
   ~USUBJID, ~TRTAN, ~SEX, ~AEBODSYS,          ~AEDECOD,
   "01",       11,   "M",  "GASTROINTESTINAL", "NAUSEA",
@@ -172,21 +157,18 @@ out3 <- SOCbyPT(
   group_vars       = c("TRTAN", "AEBODSYS", "AEDECOD"),
   trtan_coln       = "12",
   by_var           = "SEX",
-  by_sort_var      = "SEX",        # could be different (e.g., a numeric key)
-  by_sort_numeric  = FALSE,      # use character order for SEX
+  by_sort_var      = "SEX",
+  by_sort_numeric  = FALSE,
   uncoded_position = "last"
 )
 
 out3
-}
 
-## Example 4: BY-specific denominators (bigN_by = "YES") + print Big-N
-## - Requires by_var to exist in dmdata (or it errors)
-## - Percentages are computed using BY x TRT denominators
-\donttest{
+
+
 out4 <- SOCbyPT(
   indata      = adae_sex,
-  dmdata      = adsl_sex,  # must include SEX for bigN_by=YES
+  dmdata      = adsl_sex,
   group_vars  = c("TRTAN", "AEBODSYS", "AEDECOD"),
   trtan_coln  = "12",
   by_var      = "SEX",
@@ -196,7 +178,7 @@ out4 <- SOCbyPT(
 
 out4
 
-# Compare to treatment-only denominators (default bigN_by = "NO"):
+
 out4_trtN <- SOCbyPT(
   indata     = adae_sex,
   dmdata     = adsl_sex,
@@ -208,18 +190,16 @@ out4_trtN <- SOCbyPT(
 )
 
 out4_trtN
-}
 
-## Example 5: Use pop_data to control available arms / ordering
-## - pop_data defines the arm set (e.g., include arms even if no AEs in indata)
-\donttest{
+
+
 pop_adsl <- tibble::tribble(
   ~USUBJID, ~TRTAN,
   "01",       11,
   "02",       11,
   "03",       12,
   "04",       12,
-  "05",       13   # arm 13 exists in population but has no AEs in adae
+  "05",       13
 )
 
 out5 <- SOCbyPT(
@@ -230,7 +210,5 @@ out5 <- SOCbyPT(
   trtan_coln = "12"
 )
 
-out5
-# You should see TRT13 column present (filled with "0" where applicable).
-}
+
 }

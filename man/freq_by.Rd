@@ -96,7 +96,6 @@ of \code{last_group} (after applying \code{na_to_code} mapping), ordered numeric
 }
 }
 \examples{
-# --- Minimal toy example: Age group, Sex, Ethnic by treatment ---
 set.seed(1)
 
 toy_adsl <- tibble::tibble(
@@ -120,11 +119,9 @@ toy_adsl <- tibble::tibble(
     )
   )
 
-# Denominator dataset typically comes from ADSL
 toy_dm <- toy_adsl |>
   dplyr::select(USUBJID, TRTAN)
 
-# --- 1) Age group by treatment (auto fmt from data) ---
 freq_by(
   data       = toy_adsl,
   denom_data = toy_dm,
@@ -132,11 +129,10 @@ freq_by(
   last_group = "AGEGR1",
   label      = "Age group, n (\%)",
   sec_ord    = 1,
-  fmt        = NULL,        # derive labels from AGEGR1 values
-  na_to_code = NULL         # AGEGR1 NA (if any) will be dropped
+  fmt        = NULL,
+  na_to_code = NULL
 )
 
-# --- 2) Sex by treatment, mapping NA to a code (fmt still auto) ---
 freq_by(
   data       = toy_adsl,
   denom_data = toy_dm,
@@ -144,11 +140,10 @@ freq_by(
   last_group = "SEX",
   label      = "Sex, n (\%)",
   sec_ord    = 2,
-  fmt        = NULL,        # auto labels: "Female", "Male", "99"
-  na_to_code = "99"         # missing SEX counted under "99"
+  fmt        = NULL,
+  na_to_code = "99"
 )
 
-# --- 3) Ethnic category with explicit fmt (named vector) ---
 fmt_ethnic <- c(
   "Hispanic or Latino"         = "Hispanic or Latino",
   "Not Hispanic or Latino"     = "Not Hispanic or Latino",
@@ -164,8 +159,8 @@ freq_by(
   label      = "Ethnic group, n (\%)",
   sec_ord    = 3,
   fmt        = fmt_ethnic,
-  include_all_fmt_levels = TRUE,  # show all levels from fmt_ethnic
-  na_to_code = "99"               # NA ETHNIC mapped to code "99"
+  include_all_fmt_levels = TRUE,
+  na_to_code = "99"
 )
 
 }

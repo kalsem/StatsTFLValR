@@ -49,11 +49,12 @@ adsl <- data.frame(
   AGE = sample(18:80, 100, replace = TRUE)
 )
 
-# Standard use with internal denominator
+
 freq_by_line(adsl, USUBJID, TRT01P, SAFFL == "Y", label = "SAF population")
 
-# Use SAF subset as denominator
+
 saf <- adsl[adsl$SAFFL == "Y", ]
+
 freq_by_line(
   adsl, USUBJID, TRT01P,
   AGE >= 65,

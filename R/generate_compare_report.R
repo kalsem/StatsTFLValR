@@ -16,7 +16,6 @@
 #' }
 #'
 #' @details
-#' ## File resolution rules
 #' The function looks for exactly one matching domain file per directory:
 #' \itemize{
 #'   \item DEV: `<domain>.<ext>`
@@ -30,7 +29,7 @@
 #' If multiple matches exist for the same domain in a directory (e.g., `adae.csv` and `adae.xpt`),
 #' the function stops with an **ambiguous match** error to prevent accidental comparisons.
 #'
-#' ## PROC COMPARE-style CSV behavior
+#' PROC COMPARE-style CSV behavior
 #' When `write_csv = TRUE`, the output includes:
 #' \itemize{
 #'   \item `_TYPE_` with values `BASE`, `COMPARE`, `DIF`
@@ -73,8 +72,7 @@
 #'   \code{\link[data.table]{fintersect}}
 #'
 #' @examples
-#' \donttest{
-#' # Create a self-contained example using temp directories
+#'
 #' td <- tempdir()
 #' dev_dir <- file.path(td, "dev")
 #' val_dir <- file.path(td, "val")
@@ -83,7 +81,7 @@
 #' dir.create(val_dir, showWarnings = FALSE)
 #' dir.create(rpt_dir, showWarnings = FALSE)
 #'
-#' # Minimal DEV/VAL CSVs (ADAE-like)
+#'
 #' dev <- data.frame(
 #'   STUDYID = "STDY1",
 #'   USUBJID = c("01", "02"),
@@ -97,7 +95,7 @@
 #' utils::write.csv(dev, file.path(dev_dir, "adae.csv"), row.names = FALSE)
 #' utils::write.csv(val, file.path(val_dir, "v-adae.csv"), row.names = FALSE)
 #'
-#' # Example 1: basic comparison + PROC COMPARE-style CSV
+#'
 #' generate_compare_report(
 #'   domain        = "adae",
 #'   dev_dir       = dev_dir,
@@ -108,7 +106,7 @@
 #'   run_comparedf = FALSE
 #' )
 #'
-#' # Example 2: case-insensitive domain ("ADAE" matches adae.csv)
+#'
 #' generate_compare_report(
 #'   domain        = "ADAE",
 #'   dev_dir       = dev_dir,
@@ -119,7 +117,7 @@
 #'   run_comparedf = FALSE
 #' )
 #'
-#' # Example 3: filter expression (same inputs, filtered)
+#'
 #' generate_compare_report(
 #'   domain        = "adae",
 #'   dev_dir       = dev_dir,
@@ -130,7 +128,7 @@
 #'   write_csv     = TRUE,
 #'   run_comparedf = FALSE
 #' )
-#' }
+#'
 #' @export
 generate_compare_report <- function(domain,
                                     dev_dir,

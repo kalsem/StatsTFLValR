@@ -53,7 +53,7 @@ including column name, label, format, class/type, missingness, uniqueness,
 and (optionally) SAS-style display for Date variables (e.g., DATE9 -> 09JUL2012).
 }
 \examples{
-\donttest{
+
 df <- data.frame(
   USUBJID = c("01", "02", "03"),
   AGE     = c(45, 50, NA),
@@ -63,5 +63,5 @@ df <- data.frame(
 )
 
 get_column_info(df)
-}
+
 }

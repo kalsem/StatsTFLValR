@@ -25,14 +25,16 @@
 #' @importFrom tools file_ext file_path_sans_ext
 #'
 #' @examples
-#' \donttest{
-#' # Single dataset:
-#' # adsl <- get_data("path/to/adam", "adsl")
+#' \dontrun{
 #'
-#' # All datasets:
-#' # ds <- get_data("path/to/adam")
-#' # adsl <- ds$adsl
+#' adsl <- get_data("path/to/adam", "adsl")
+#'
+#' ds <- get_data("path/to/adam")
+#'
+#' adsl <- ds$adsl
+#'
 #' }
+#'
 #' @export
 get_data <- function(dir, file_names = NULL) {
 

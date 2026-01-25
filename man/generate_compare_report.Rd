@@ -77,8 +77,6 @@ This function is intended for ADaM/SDTM/TFL validation workflows and supports:
 }
 }
 \details{
-\subsection{File resolution rules}{
-
 The function looks for exactly one matching domain file per directory:
 \itemize{
 \item DEV: \verb{<domain>.<ext>}
@@ -91,10 +89,8 @@ Supported extensions (priority order) are:
 
 If multiple matches exist for the same domain in a directory (e.g., \code{adae.csv} and \code{adae.xpt}),
 the function stops with an \strong{ambiguous match} error to prevent accidental comparisons.
-}
 
-\subsection{PROC COMPARE-style CSV behavior}{
-
+PROC COMPARE-style CSV behavior
 When \code{write_csv = TRUE}, the output includes:
 \itemize{
 \item \verb{_TYPE_} with values \code{BASE}, \code{COMPARE}, \code{DIF}
@@ -105,10 +101,8 @@ When \code{write_csv = TRUE}, the output includes:
 \item For other types, \code{DIF} is a character mask (\code{X} indicates difference)
 }
 }
-}
 \examples{
-\donttest{
-# Create a self-contained example using temp directories
+
 td <- tempdir()
 dev_dir <- file.path(td, "dev")
 val_dir <- file.path(td, "val")
@@ -117,7 +111,7 @@ dir.create(dev_dir, showWarnings = FALSE)
 dir.create(val_dir, showWarnings = FALSE)
 dir.create(rpt_dir, showWarnings = FALSE)
 
-# Minimal DEV/VAL CSVs (ADAE-like)
+
 dev <- data.frame(
   STUDYID = "STDY1",
   USUBJID = c("01", "02"),
@@ -131,7 +125,7 @@ val$AETERM[2] <- "VOMITING"
 utils::write.csv(dev, file.path(dev_dir, "adae.csv"), row.names = FALSE)
 utils::write.csv(val, file.path(val_dir, "v-adae.csv"), row.names = FALSE)
 
-# Example 1: basic comparison + PROC COMPARE-style CSV
+
 generate_compare_report(
   domain        = "adae",
   dev_dir       = dev_dir,
@@ -142,7 +136,7 @@ generate_compare_report(
   run_comparedf = FALSE
 )
 
-# Example 2: case-insensitive domain ("ADAE" matches adae.csv)
+
 generate_compare_report(
   domain        = "ADAE",
   dev_dir       = dev_dir,
@@ -153,7 +147,7 @@ generate_compare_report(
   run_comparedf = FALSE
 )
 
-# Example 3: filter expression (same inputs, filtered)
+
 generate_compare_report(
   domain        = "adae",
   dev_dir       = dev_dir,
@@ -164,7 +158,7 @@ generate_compare_report(
   write_csv     = TRUE,
   run_comparedf = FALSE
 )
-}
+
 }
 \seealso{
 \code{\link[arsenal]{comparedf}}, \code{\link[data.table]{fsetdiff}},

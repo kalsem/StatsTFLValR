@@ -33,7 +33,7 @@
 #' @importFrom purrr map map_chr
 #'
 #' @examples
-#' \donttest{
+#'
 #' df <- data.frame(
 #'   USUBJID = c("01", "02", "03"),
 #'   AGE     = c(45, 50, NA),
@@ -43,7 +43,7 @@
 #' )
 #'
 #' get_column_info(df)
-#' }
+#'
 #' @export
 get_column_info <- function(
     df,

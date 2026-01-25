@@ -30,12 +30,14 @@ If multiple files with the same base name but different extensions exist
 duplicates to avoid ambiguity.
 }
 \examples{
-\donttest{
-# Single dataset:
-# adsl <- get_data("path/to/adam", "adsl")
+\dontrun{
 
-# All datasets:
-# ds <- get_data("path/to/adam")
-# adsl <- ds$adsl
+adsl <- get_data("path/to/adam", "adsl")
+
+ds <- get_data("path/to/adam")
+
+adsl <- ds$adsl
+
 }
+
 }

@@ -25,28 +25,16 @@ emulates that behavior by manually adjusting and checking the fractional compone
 of the value before applying rounding.
 }
 \examples{
-# Default rounding (digits = 0)
 sas_round(c(1.5, 2.5, 3.5, -1.5, -2.5, -3.5))
-# [1]  2  3  4 -2 -3 -4
 
-# Round to 1 decimal place
 sas_round(c(1.25, 1.35, -1.25, -1.35), digits = 1)
-# [1]  1.3  1.4 -1.3 -1.4
 
-# Round to 2 decimal places
 sas_round(c(1.235, 1.245, -1.235, -1.245), digits = 2)
-# [1]  1.24  1.25 -1.24 -1.25
 
-# Round to 3 decimal places
 sas_round(c(1.2345, 1.2355), digits = 3)
-# [1] 1.235 1.236
 
-# Round to 4 decimal places
 sas_round(c(1.23445, 1.23455), digits = 4)
-# [1] 1.2345 1.2346
 
-# Round to 5 decimal places
 sas_round(c(1.234445, 1.234455), digits = 5)
-# [1] 1.23445 1.23446
 
 }

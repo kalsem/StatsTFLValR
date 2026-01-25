@@ -110,16 +110,9 @@ equal \code{"UNCODED"} (case-insensitive, leading/trailing space ignored). Such 
 assigned to the end of the table after sorting.
 }
 \examples{
-## Example 1: Default (RTF indent mode) + count-based sorting
-## - atc4_spaces/cmdecod_spaces are NULL (default)
-## - rtf_safe = TRUE (default) so `stat` contains RTF indent strings
-## - sort_by = "count" (default), driven by n__<trtan_coln>
-\donttest{
+
 library(dplyr)
 
-# Example input (CM-like) data:
-# - One row per medication record (can be multiple records per subject)
-# - Required: USUBJID + group_vars columns
 cm <- tibble::tribble(
   ~USUBJID, ~TRTAN, ~ATC2,      ~ATC4,         ~CMDECOD,
   "01",       21,   "A - Alim.", "A01A",        "CHLORHEXIDINE",
@@ -131,7 +124,8 @@ cm <- tibble::tribble(
   "06",       22,   "UNCODED",   "UNCODED",     "UNCODED"
 )
 
-# Denominators (one row per subject) for \%:
+
+
 dm <- tibble::tribble(
   ~USUBJID, ~TRTAN,
   "01",       21,
@@ -146,58 +140,39 @@ out_rtf <- ATCbyDrug(
   indata      = cm,
   dmdata      = dm,
   group_vars  = c("TRTAN", "ATC2", "ATC4", "CMDECOD"),
-  trtan_coln  = "21",         # count-sorting uses n__21
+  trtan_coln  = "21",
   rtf_safe    = TRUE,
   sort_by     = "count"
 )
 
 out_rtf
 
-# Typical columns in output:
-# - stat (indented label; may include RTF strings for ATC4 and CMDECOD rows)
-# - trt21, trt22 ... (formatted "n (pct)")
-# - n__21, n__22 ... (raw counts)
-# - sec_ord, psec_ord, sort_ord (ordering helpers)
-}
 
-## Example 2: SAS blanks mode (no RTF in `stat`)
-## - Provide atc4_spaces and/or cmdecod_spaces
-## - Indentation is done using blank spaces only
-\donttest{
+
 out_spaces <- ATCbyDrug(
   indata          = cm,
   dmdata          = dm,
   group_vars      = c("TRTAN", "ATC2", "ATC4", "CMDECOD"),
   trtan_coln      = "21",
   sort_by         = "count",
-  atc4_spaces     = 2,   # indent ATC4 by 2 spaces
-  cmdecod_spaces  = 4    # indent Drug by 4 spaces
+  atc4_spaces     = 2,
+  cmdecod_spaces  = 4
 )
 
 out_spaces
 
-# In this mode, `stat` is plain text:
-# - ATC2 rows: "A - Alim."
-# - ATC4 rows: "  A01A"
-# - Drug rows: "    CHLORHEXIDINE"
-}
 
-## Example 3: Alphabetical sorting + UNCODED pushed to end
-## - sort_by = "alpha": alphabetical at each nested level
-## - rows where ATC2/ATC4/CMDECOD are ALL "UNCODED" are moved to the end
-\donttest{
+
 out_alpha <- ATCbyDrug(
   indata      = cm,
   dmdata      = dm,
   group_vars  = c("TRTAN", "ATC2", "ATC4", "CMDECOD"),
   trtan_coln  = "21",
   sort_by     = "alpha",
-  rtf_safe    = FALSE    # optional: ensures `stat` has no RTF strings
+  rtf_safe    = FALSE
 )
 
 out_alpha
 
-# Verify UNCODED behavior: the fully-UNCODED triple should appear last.
-# (Only triggers when ATC2 == ATC4 == CMDECOD == "UNCODED", case-insensitive.)
-}
+
 }

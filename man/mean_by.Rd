@@ -72,7 +72,6 @@ Values exactly halfway between two increments are rounded away from zero
 \examples{
 library(dplyr)
 
-# Example 1: Basic usage with inferred precision
 df <- tibble::tibble(
   USUBJID = rep(1:6, each = 1),
   TRTAN   = c(1, 1, 2, 2, 3, 3),
@@ -86,7 +85,7 @@ mean_by(
   sec_ord       = 1
 )
 
-# Example 2: Forcing precision to 2 decimal places
+
 mean_by(
   data          = df,
   group_var     = TRTAN,
@@ -96,7 +95,7 @@ mean_by(
   precision_override = 2
 )
 
-# Example 3: Using SAS-style rounding
+
 mean_by(
   data          = df,
   group_var     = TRTAN,
@@ -106,12 +105,13 @@ mean_by(
   use_sas_round = TRUE
 )
 
-# Example 4: Missing treatment group automatically filled
+
 df2 <- tibble::tibble(
   USUBJID = c(1, 2, 3, 4),
   TRTAN   = c(1, 1, 3, 3),
   BMIBL   = c(25.1, 26.3, 23.4, 27.6)
 )
+
 mean_by(
   data      = df2,
   group_var = TRTAN,
